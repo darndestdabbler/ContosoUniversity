@@ -77,3 +77,36 @@ packaging.
 
 > Do NOT hand-author `sessions.json`. The first `session start`
 > bootstraps it from this plan — state files are the writers' job.
+
+### Session 3: The calculator page
+
+1. Register.
+2. Add `src/ContosoUniversity/Features/Calculator/Calculator.cs`: a static
+   `Calculator` class with `Add` and `Subtract`, each taking two decimals and
+   returning a decimal. List it in `ContosoUniversity.csproj` as a `Compile`
+   item.
+3. Add `src/ContosoUniversity/Features/Calculator/UiController.cs`, an
+   `Index` action for GET that shows the form and one for POST that takes
+   the two numbers and shows their sum and difference, and
+   `src/ContosoUniversity/Features/Calculator/Index.cshtml`, the view. List
+   the controller as a `Compile` item and the view as a `Content` item in
+   `ContosoUniversity.csproj`, and add a Calculator link to the navigation
+   in `src/ContosoUniversity/Features/Shared/_Layout.cshtml`.
+4. Add `src/IntegrationTests/Features/Calculator/CalculatorTests.cs` with
+   one test of `Add` and one of `Subtract`, listed in
+   `IntegrationTests.csproj` as a `Compile` item. The compile control's
+   MSBuild build of `src/ContosoUniversity.sln` builds it, and the Fixie
+   console in `dabbler.yaml`'s `dotnet-framework` suite runs it.
+
+### Session 4: Documentation comments on the calculator
+
+1. Register.
+2. Add XML documentation comments to `Calculator`, `Add` and `Subtract` in
+   `src/ContosoUniversity/Features/Calculator/Calculator.cs`, and to the
+   calculator `UiController` and both `Index` actions in
+   `src/ContosoUniversity/Features/Calculator/UiController.cs`. No code
+   line changes.
+3. Add a Razor comment at the top of
+   `src/ContosoUniversity/Features/Calculator/Index.cshtml` saying what the
+   page is. No markup changes. The compile control's MSBuild build shows
+   the comments compile, and the Fixie console still runs `CalculatorTests`.
