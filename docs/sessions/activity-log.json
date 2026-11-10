@@ -1,0 +1,34 @@
+{
+  "createdDate": "2026-11-10T18:26:13.735000-05:00",
+  "totalSessions": 0,
+  "entries": [
+    {
+      "kind": "task-declaration",
+      "sessionNumber": 1,
+      "dateTime": "2026-11-10T18:26:13.831000-05:00",
+      "task": "Session 1 writes docs/planning/solution-plan.md from the brief in docs/planning/brief.md and nothing else: one paragraph on ContosoUniversity as found -- an ASP.NET MVC 5 application on .NET Framework 4.8.1 in non-SDK project files with packages.config under src\\, the solution at src\\ContosoUniversity.sln, feature folders under src\\ContosoUniversity\\Features, a DBDeployment project for RoundhousE, and Fixie 1 integration tests in src\\IntegrationTests run by the Fixie console that dabbler.yaml's dotnet-framework suite already declares -- and one section per change: the calculator page (a Features\\Calculator folder with a controller, a view and the arithmetic, reached by the default route and linked from the layout, tested in IntegrationTests and listed in both .csproj files), and the documentation comments on what that change added, with nothing else changed. It says each change is shown to work by the compile control's MSBuild build and the Fixie suite, and that the existing failing CreateTests.Should_create is out of scope.",
+      "releasable": false
+    },
+    {
+      "kind": "task-declaration",
+      "sessionNumber": 2,
+      "dateTime": "2026-11-10T18:32:14.914000-05:00",
+      "task": "Session 2 appends two numbered sessions to docs/sessions/session-plan.md from docs/planning/solution-plan.md and writes nothing else: Session 3, the calculator page -- the Calculator arithmetic, its UiController and Index view in a new Features\\Calculator folder listed in ContosoUniversity.csproj, the layout's navigation link, and CalculatorTests in IntegrationTests listed in IntegrationTests.csproj, shown by the compile control's MSBuild build and the Fixie console -- and Session 4, XML documentation comments on what session 3 added and a Razor comment atop its view, with no code, markup or project file changed. Each has a Register step and three or four work steps, and no release session is planned, because the brief names none.",
+      "releasable": false
+    },
+    {
+      "kind": "task-declaration",
+      "sessionNumber": 3,
+      "dateTime": "2026-11-10T18:34:44.756000-05:00",
+      "task": "Session 3 adds an online calculator page to ContosoUniversity inside its existing shape: src/ContosoUniversity/Features/Calculator/Calculator.cs (a static Calculator with Add and Subtract over decimals), src/ContosoUniversity/Features/Calculator/UiController.cs (a GET Index showing the form and a POST Index showing the sum and difference, found by the existing ControllerFactory as ContosoUniversity.Features.Calculator.UiController) and src/ContosoUniversity/Features/Calculator/Index.cshtml (found by the existing feature view engine), each listed in ContosoUniversity.csproj as a Compile or Content item; a Calculator link in the navigation of src/ContosoUniversity/Features/Shared/_Layout.cshtml; and src/IntegrationTests/Features/Calculator/CalculatorTests.cs, one test of Add and one of Subtract, listed in IntegrationTests.csproj and run by the existing Fixie console. It is shown by the compile control's MSBuild build of src/ContosoUniversity.sln and by the Fixie run passing CalculatorTests.",
+      "releasable": false
+    },
+    {
+      "kind": "task-declaration",
+      "sessionNumber": 4,
+      "dateTime": "2026-11-10T18:41:05.461000-05:00",
+      "task": "Session 4 adds documentation comments to what session 3 added and changes nothing else: XML documentation comments on the static Calculator and its Add and Subtract in src/ContosoUniversity/Features/Calculator/Calculator.cs and on the calculator UiController and both Index actions in src/ContosoUniversity/Features/Calculator/UiController.cs, and a Razor comment at the top of src/ContosoUniversity/Features/Calculator/Index.cshtml saying what the page is. Each step is shown by the compile control's MSBuild build and by a check that the diff of its files against HEAD only adds comment lines and removes none.",
+      "releasable": false
+    }
+  ]
+}
