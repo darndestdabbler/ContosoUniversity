@@ -269,6 +269,8 @@
     <Compile Include="Features\Student\Details.cs" />
     <Compile Include="Features\Student\Edit.cs" />
     <Compile Include="Features\Student\Index.cs" />
+    <Compile Include="Features\Calculator\Calculator.cs" />
+    <Compile Include="Features\Calculator\UiController.cs" />
     <Compile Include="Features\Course\UiController.cs" />
     <Compile Include="Features\Department\Delete.cs" />
     <Compile Include="Features\Department\Edit.cs" />
@@ -406,6 +408,7 @@
     <Content Include="Features\Home\About.cshtml" />
     <Content Include="Features\Home\Contact.cshtml" />
     <Content Include="Features\Home\Index.cshtml" />
+    <Content Include="Features\Calculator\Index.cshtml" />
     <Content Include="Features\Student\Create.cshtml" />
     <Content Include="Features\Student\Delete.cshtml" />
     <Content Include="Features\Student\Details.cshtml" />
