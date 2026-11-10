@@ -15,7 +15,7 @@ The numbered sessions are declared from `session-plan.md`; each one's task is wh
 | 1 | Author or import the change plan | no | 2026-11-10 |
 | 2 | Break the change plan into numbered sessions | no | 2026-11-10 |
 | 3 | The calculator page | no | 2026-11-10 |
-| 4 | Documentation comments on the calculator | — | not declared |
+| 4 | Documentation comments on the calculator | no | 2026-11-10 |
 
 ### Session 1 — Author or import the change plan
 
@@ -34,3 +34,9 @@ Session 2 appends two numbered sessions to docs/sessions/session-plan.md from do
 **Releasable: no.**
 
 Session 3 adds an online calculator page to ContosoUniversity inside its existing shape: src/ContosoUniversity/Features/Calculator/Calculator.cs (a static Calculator with Add and Subtract over decimals), src/ContosoUniversity/Features/Calculator/UiController.cs (a GET Index showing the form and a POST Index showing the sum and difference, found by the existing ControllerFactory as ContosoUniversity.Features.Calculator.UiController) and src/ContosoUniversity/Features/Calculator/Index.cshtml (found by the existing feature view engine), each listed in ContosoUniversity.csproj as a Compile or Content item; a Calculator link in the navigation of src/ContosoUniversity/Features/Shared/_Layout.cshtml; and src/IntegrationTests/Features/Calculator/CalculatorTests.cs, one test of Add and one of Subtract, listed in IntegrationTests.csproj and run by the existing Fixie console. It is shown by the compile control's MSBuild build of src/ContosoUniversity.sln and by the Fixie run passing CalculatorTests.
+
+### Session 4 — Documentation comments on the calculator
+
+**Releasable: no.**
+
+Session 4 adds documentation comments to what session 3 added and changes nothing else: XML documentation comments on the static Calculator and its Add and Subtract in src/ContosoUniversity/Features/Calculator/Calculator.cs and on the calculator UiController and both Index actions in src/ContosoUniversity/Features/Calculator/UiController.cs, and a Razor comment at the top of src/ContosoUniversity/Features/Calculator/Index.cshtml saying what the page is. Each step is shown by the compile control's MSBuild build and by a check that the diff of its files against HEAD only adds comment lines and removes none.
