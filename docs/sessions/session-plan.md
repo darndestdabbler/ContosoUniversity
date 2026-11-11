@@ -110,3 +110,40 @@ packaging.
    `src/ContosoUniversity/Features/Calculator/Index.cshtml` saying what the
    page is. No markup changes. The compile control's MSBuild build shows
    the comments compile, and the Fixie console still runs `CalculatorTests`.
+
+### Session 5 of 5: Reliable LocalDB setup and transaction failure handling
+
+Scope: `src/IntegrationTests/LocalDbFactory.cs`,
+`src/IntegrationTests/IntegrationTestContainerFactory.cs`,
+`src/IntegrationTests/TestContextFixture.cs`,
+`src/ContosoUniversity/DAL/SchoolContext.cs`, the integration-test project
+and its Fixie coverage, and the related `dabbler.yaml` suite note.
+
+Why. The integration suite can fail while Entity Framework attempts to create
+a database whose MDF file already exists. The test helper then calls
+`CloseTransaction` again after its first call has already handled and
+re-thrown the failure, which can obscure the original database error. The
+current factory and container choose the database name at separate points,
+so their runtime connection settings need to be made consistent.
+
+What. Establish one explicit, test-owned LocalDB database identity and a
+repeatable creation and cleanup lifecycle that cannot collide with an orphaned
+MDF file or delete unrelated data. Make transaction failure handling
+one-shot so rollback and disposal do not trigger another `SaveChanges` and
+the original exception remains visible. Add focused Fixie regression
+coverage for first-run/repeated-run database initialization and for preserving
+an action or save failure; list any new test source in the non-SDK project.
+Update the suite note to reflect verified behavior, without making the whole
+suite a close requirement while its separately recorded foreign-key failure
+remains unresolved.
+
+Non-goals. Do not change the .NET Framework target, project format, LocalDB
+or Fixie test framework; alter production database configuration; delete
+unverified user data; or fix unrelated foreign-key behavior unless evidence
+shows it is caused by this test-database lifecycle change.
+
+Tests. Build `src/ContosoUniversity.sln` with the existing MSBuild compile
+control; run the focused Fixie regression tests and the existing integration
+suite, recording the known independent failure accurately if it remains.
+
+Releasable. no.
