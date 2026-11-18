@@ -49,3 +49,9 @@ Session 4 adds documentation comments to what session 3 added and changes nothin
 **Releasable: no.**
 
 Add a Percentage page beside the calculator, following the calculator's pattern: a static Percentage.Of(part, whole) that returns part / whole * 100 rounded to two places and throws ArgumentException when whole is zero; a Features/Percentage UiController with GET and POST Index actions and an Index.cshtml view; a Percentage link next to Calculator in _Layout.cshtml; and two tests in IntegrationTests (Of, and the zero-whole refusal). New files are listed in the non-SDK .csproj files as Compile/Content items.
+
+### Session 6 — A step whose check fails, on purpose
+
+**Rolled back:**
+
+- 2026-11-18 — session 6 — Rollback to Start of This Session from the Work Explorer (operator)
