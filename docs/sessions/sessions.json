@@ -80,14 +80,54 @@
         "identityProvenance": "direct"
       },
       "verificationVerdict": "VERIFIED",
-      "startCommit": "fa415a3a021c4ba4aaa1767bb7a634e566aa5ab4",
+      "verification": {
+        "rounds": 1,
+        "verifierModel": "gpt-5.6-terra",
+        "verifierProvider": "openai",
+        "transport": "api"
+      },
       "frameworkVersion": "3.31.0",
+      "startCommit": "fa415a3a021c4ba4aaa1767bb7a634e566aa5ab4"
+    },
+    {
+      "number": 5,
+      "title": "The percentage page",
+      "status": "in-progress",
+      "startedAt": "2026-11-18T12:00:04.544000-05:00",
+      "orchestrator": {
+        "engine": "claude-code",
+        "provider": "anthropic",
+        "model": "claude-sonnet-5-5",
+        "identityProvenance": "direct"
+      },
+      "frameworkVersion": "3.36.0",
+      "startCommit": "77dccce636f2e6dac676343dbedbd3c92aa08ccd",
+      "completedAt": null,
+      "verificationVerdict": "VERIFIED",
       "verification": {
         "rounds": 1,
         "verifierModel": "gpt-5.6-terra",
         "verifierProvider": "openai",
         "transport": "api"
       }
+    },
+    {
+      "number": 6,
+      "title": "A step whose check fails, on purpose",
+      "status": "not-started",
+      "startedAt": null,
+      "completedAt": null,
+      "orchestrator": null,
+      "verificationVerdict": null
+    },
+    {
+      "number": 7,
+      "title": "Reliable LocalDB setup and transaction failure handling",
+      "status": "not-started",
+      "startedAt": null,
+      "completedAt": null,
+      "orchestrator": null,
+      "verificationVerdict": null
     }
   ]
 }

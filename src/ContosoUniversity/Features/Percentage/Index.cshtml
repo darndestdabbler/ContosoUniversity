@@ -1,0 +1,26 @@
+@* The percentage page: a part and a whole in, the part as a percentage of the whole out. The form
+   posts normally (no-ajax) so the POST action's result renders here. *@
+@{
+    ViewBag.Title = "Percentage";
+}
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Index", "Percentage", FormMethod.Post, new { @class = "form-inline no-ajax" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <input type="number" step="any" name="part" class="form-control" value="@ViewBag.Part" required />
+    </div>
+    <div class="form-group">
+        <input type="number" step="any" name="whole" class="form-control" value="@ViewBag.Whole" required />
+    </div>
+    <button type="submit" class="btn btn-default">Calculate</button>
+}
+
+@if (ViewBag.Result != null)
+{
+    <dl class="dl-horizontal">
+        <dt>Percentage</dt>
+        <dd>@ViewBag.Result%</dd>
+    </dl>
+}

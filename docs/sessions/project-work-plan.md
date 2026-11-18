@@ -16,6 +16,9 @@ The numbered sessions are declared from `session-plan.md`; each one's task is wh
 | 2 | Break the change plan into numbered sessions | no | 2026-11-10 |
 | 3 | The calculator page | no | 2026-11-10 |
 | 4 | Documentation comments on the calculator | no | 2026-11-10 |
+| 5 | The percentage page | no | 2026-11-18 |
+| 6 | A step whose check fails, on purpose | — | not declared |
+| 7 | Reliable LocalDB setup and transaction failure handling | — | not declared |
 
 ### Session 1 — Author or import the change plan
 
@@ -40,3 +43,9 @@ Session 3 adds an online calculator page to ContosoUniversity inside its existin
 **Releasable: no.**
 
 Session 4 adds documentation comments to what session 3 added and changes nothing else: XML documentation comments on the static Calculator and its Add and Subtract in src/ContosoUniversity/Features/Calculator/Calculator.cs and on the calculator UiController and both Index actions in src/ContosoUniversity/Features/Calculator/UiController.cs, and a Razor comment at the top of src/ContosoUniversity/Features/Calculator/Index.cshtml saying what the page is. Each step is shown by the compile control's MSBuild build and by a check that the diff of its files against HEAD only adds comment lines and removes none.
+
+### Session 5 — The percentage page
+
+**Releasable: no.**
+
+Add a Percentage page beside the calculator, following the calculator's pattern: a static Percentage.Of(part, whole) that returns part / whole * 100 rounded to two places and throws ArgumentException when whole is zero; a Features/Percentage UiController with GET and POST Index actions and an Index.cshtml view; a Percentage link next to Calculator in _Layout.cshtml; and two tests in IntegrationTests (Of, and the zero-whole refusal). New files are listed in the non-SDK .csproj files as Compile/Content items.
