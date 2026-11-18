@@ -111,7 +111,50 @@ packaging.
    page is. No markup changes. The compile control's MSBuild build shows
    the comments compile, and the Fixie console still runs `CalculatorTests`.
 
-### Session 5 of 5: Reliable LocalDB setup and transaction failure handling
+### Session 5 of 7: The percentage page
+
+Scope: `src/ContosoUniversity/Features/Percentage/`,
+`src/IntegrationTests/Features/Percentage/`, the two `.csproj` files'
+items, and the navigation in `_Layout.cshtml`.
+
+1. Register.
+2. Add `src/ContosoUniversity/Features/Percentage/Percentage.cs`: a static
+   `Percentage` class with `Of(decimal part, decimal whole)` returning
+   `part / whole * 100` rounded to two places, and throwing
+   `ArgumentException` when `whole` is zero. List it in
+   `ContosoUniversity.csproj` as a `Compile` item.
+3. Add `src/ContosoUniversity/Features/Percentage/UiController.cs`, an
+   `Index` action for GET that shows the form and one for POST that shows
+   the percentage, and `src/ContosoUniversity/Features/Percentage/Index.cshtml`,
+   the view, following the calculator page's pattern. List the controller
+   as a `Compile` item and the view as a `Content` item, and add a
+   Percentage link beside Calculator in
+   `src/ContosoUniversity/Features/Shared/_Layout.cshtml`.
+4. Add `src/IntegrationTests/Features/Percentage/PercentageTests.cs` with
+   one test of `Of` and one of the zero-whole refusal, listed in
+   `IntegrationTests.csproj` as a `Compile` item.
+
+Non-goals. No change to the calculator, the target framework, the project
+format or the test framework.
+
+Releasable. no.
+
+### Session 6 of 7: A step whose check fails, on purpose
+
+Scope: `src/IntegrationTests/Features/Percentage/PercentageTests.cs` only.
+
+This session exists to walk a stop. Its one work step adds a test to
+`PercentageTests.cs` asserting that `Percentage.Of(1, 3)` is `33.34`, which
+it is not (it is `33.33`), and declares as its check the compile control's
+MSBuild build followed by the Fixie console over
+`ContosoUniversity.IntegrationTests.dll`, which must then fail. Do not
+change `Percentage.cs` and do not change the expected value to make the
+check pass: when the check refuses the step, report the step blocked with
+the failing test named in the notes, and leave the stop to the person.
+
+Releasable. no.
+
+### Session 7 of 7: Reliable LocalDB setup and transaction failure handling
 
 Scope: `src/IntegrationTests/LocalDbFactory.cs`,
 `src/IntegrationTests/IntegrationTestContainerFactory.cs`,
