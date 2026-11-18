@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 005 transcript</title>
+<style>
+:root {
+  --page: #ffffff;
+  --ink: #1f1f1f;
+  --faint: #e4e4e4;
+  --panel: #f6f6f6;
+  --tone-milestone: #2a5db0;
+  --tone-good: #256029;
+  --tone-warn: #8a6100;
+  --tone-bad: #a31515;
+  --tone-muted: #6b6b6b;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page: #1e1e1e;
+    --ink: #d4d4d4;
+    --faint: #3a3a3a;
+    --panel: #252526;
+  --tone-milestone: #3874db;
+  --tone-good: #54a33b;
+  --tone-warn: #b79427;
+  --tone-bad: #f14c4c;
+  --tone-muted: #8c8c8c;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  padding: 24px 16px 64px;
+  background: var(--page);
+  color: var(--ink);
+  font: 14px/1.6 ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+}
+main { max-width: 68rem; margin: 0 auto; }
+h1 { font-size: 1.4rem; margin: 0 0 .25rem; }
+h2 { font-size: 1.05rem; margin: 2.5rem 0 .75rem; border-bottom: 1px solid var(--faint); padding-bottom: .3rem; }
+.stamp { color: var(--tone-muted); font-size: .85rem; margin: 0 0 .25rem; }
+.mono, pre, code { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; }
+.lines { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; font-size: 13px; }
+.line { white-space: pre-wrap; word-break: break-word; padding-left: 10.5ch; text-indent: -10.5ch; }
+.at { color: var(--tone-muted); }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td { text-align: left; padding: .35rem .6rem; border-bottom: 1px solid var(--faint); vertical-align: top; }
+th { color: var(--tone-muted); font-weight: 600; }
+details { margin: .5rem 0; }
+summary { cursor: pointer; }
+td details { margin: 0; }
+tr:has(details:not([open])) + tr.findings { display: none; }
+tr.findings > td { padding: 0 0 .5rem 1.5rem; }
+pre { background: var(--panel); padding: .75rem; overflow-x: auto; white-space: pre-wrap; word-break: break-word; font-size: 12.5px; }
+.stop, .cancelled { border-left: 3px solid var(--tone-bad); background: var(--panel); padding: .6rem .9rem; }
+.milestone { color: var(--tone-milestone); }
+.good { color: var(--tone-good); }
+.warn { color: var(--tone-warn); }
+.bad { color: var(--tone-bad); }
+.muted { color: var(--tone-muted); }
+</style>
+</head>
+<body>
+<main>
+<h1>Session 005 transcript</h1>
+<p class="stamp">Rendered 2026-11-18T17:11:28.511Z by dabbler-ai-router 3.36.0 at 5ea50c980118dff602e4cd797949b60b13df15ba.</p>
+<p class="stamp">Engine cli, last phase <span class="milestone">log</span>, started 2026-11-18T12:08:13.689-05:00.</p>
+<h2>Session Plan</h2>
+<h3>Session 5 of 7: The percentage page</h3>
+<p>Scope: <code>src/ContosoUniversity/Features/Percentage/</code>, <code>src/IntegrationTests/Features/Percentage/</code>, the two <code>.csproj</code> files' items, and the navigation in <code>_Layout.cshtml</code>.</p>
+<ol><li>Register.</li><li>Add <code>src/ContosoUniversity/Features/Percentage/Percentage.cs</code>: a static <code>Percentage</code> class with <code>Of(decimal part, decimal whole)</code> returning <code>part / whole * 100</code> rounded to two places, and throwing <code>ArgumentException</code> when <code>whole</code> is zero. List it in <code>ContosoUniversity.csproj</code> as a <code>Compile</code> item.</li><li>Add <code>src/ContosoUniversity/Features/Percentage/UiController.cs</code>, an <code>Index</code> action for GET that shows the form and one for POST that shows the percentage, and <code>src/ContosoUniversity/Features/Percentage/Index.cshtml</code>, the view, following the calculator page's pattern. List the controller as a <code>Compile</code> item and the view as a <code>Content</code> item, and add a Percentage link beside Calculator in <code>src/ContosoUniversity/Features/Shared/_Layout.cshtml</code>.</li><li>Add <code>src/IntegrationTests/Features/Percentage/PercentageTests.cs</code> with one test of <code>Of</code> and one of the zero-whole refusal, listed in <code>IntegrationTests.csproj</code> as a <code>Compile</code> item.</li></ol>
+<p>Non-goals. No change to the calculator, the target framework, the project format or the test framework.</p>
+<p>Releasable. no.</p>
+<h2>Work Plan</h2>
+<p>Add a Percentage page beside the calculator, following the calculator's pattern: a static Percentage.Of(part, whole) that returns part / whole * 100 rounded to two places and throws ArgumentException when whole is zero; a Features/Percentage UiController with GET and POST Index actions and an Index.cshtml view; a Percentage link next to Calculator in _Layout.cshtml; and two tests in IntegrationTests (Of, and the zero-whole refusal). New files are listed in the non-SDK .csproj files as Compile/Content items.</p>
+<p>Landed <a href="https://github.com/darndestdabbler/ContosoUniversity/commit/700daa449363ca93e977eafaea88cc09048d2582"><code>700daa449363ca93e977eafaea88cc09048d2582</code></a>.</p>
+<table>
+<tr><th>Step</th><th>Ask</th><th>Files</th><th>Checks</th><th>Accepted</th></tr>
+<tr><td>Percentage class</td><td><p>Add src/ContosoUniversity/Features/Percentage/Percentage.cs: namespace ContosoUniversity.Features.Percentage, a public static class Percentage with Of(decimal part, decimal whole) returning Math.Round(part / whole * 100, 2) and throwing ArgumentException when whole is zero. Add it to ContosoUniversity.csproj as a Compile item next to the Calculator items.</p></td><td></td><td><code>powershell -NoProfile -Command if (-not (Select-String -Path src/ContosoUniversity/ContosoUniversity.csproj -SimpleMatch 'Features\Percentage\Percentage.cs' -Quiet)) { exit 1 }</code></td><td>yes</td></tr>
+<tr><td>Percentage ui</td><td><p>Add src/ContosoUniversity/Features/Percentage/UiController.cs (GET Index shows the form; [HttpPost][ValidateAntiForgeryToken] Index(decimal part, decimal whole) sets ViewBag values and the result from Percentage.Of) and Index.cshtml modelled on the calculator view. List the controller as a Compile item and the view as a Content item in ContosoUniversity.csproj, and add a Percentage ActionLink beside Calculator in Features/Shared/_Layout.cshtml.</p></td><td></td><td><code>powershell -NoProfile -Command if (-not ((Select-String -Path src/ContosoUniversity/ContosoUniversity.csproj -SimpleMatch 'Features\Percentage\UiController.cs' -Quiet) -and (Select-String -Path src/ContosoUniversity/ContosoUniversity.csproj -SimpleMatch 'Features\Percentage\Index.cshtml' -Quiet) -and (Select-String -Path src/ContosoUniversity/Features/Shared/_Layout.cshtml -SimpleMatch '&quot;Percentage&quot;' -Quiet))) { exit 1 }</code></td><td>yes</td></tr>
+<tr><td>Percentage tests</td><td><p>Add src/IntegrationTests/Features/Percentage/PercentageTests.cs with one test of Of (e.g. Of(1, 3) is 33.33m) and one of the zero-whole refusal (ArgumentException, via Should.Throw), in the style of CalculatorTests. List it in IntegrationTests.csproj as a Compile item.</p></td><td></td><td><code>powershell -NoProfile -Command if (-not (Select-String -Path src/IntegrationTests/IntegrationTests.csproj -SimpleMatch 'Features\Percentage\PercentageTests.cs' -Quiet)) { exit 1 }</code></td><td>yes</td></tr>
+</table>
+<p>Non-goals:</p>
+<ul><li>No change to the calculator feature, the target framework, the project format or the test framework.</li><li>No extra validation, error-page handling, or abstractions beyond what the session plan names.</li></ul>
+<h2>What the framework said</h2>
+<div class="lines"><div class="line"><span class="at">[17:08:13]</span> <span class="muted">run-started</span> session=005 mode=pull</div>
+<div class="line"><span class="at">[17:08:13]</span> <span class="muted">instruction-issued</span> seq=1 kind=step step=plan</div>
+<div class="line"><span class="at">[17:08:39]</span> <span class="muted">run-resumed</span> session=005 phase=<span class="milestone">plan</span> mode=pull</div>
+<div class="line"><span class="at">[17:08:39]</span> <span class="muted">answer-taken</span> steps=3</div>
+<div class="line"><span class="at">[17:08:39]</span> <span class="muted">plan-accepted</span> steps=[&quot;percentage-class&quot;,&quot;percentage-ui&quot;,&quot;percentage-tests&quot;] non_goals=2</div>
+<div class="line"><span class="at">[17:08:41]</span> <span class="milestone">phase</span> phase=<span class="milestone">work</span></div>
+<div class="line"><span class="at">[17:08:41]</span> <span class="muted">instruction-issued</span> seq=2 kind=step step=percentage-class</div>
+<div class="line"><span class="at">[17:08:56]</span> <span class="muted">run-resumed</span> session=005 phase=<span class="milestone">work</span> mode=pull</div>
+<div class="line"><span class="at">[17:08:56]</span> <span class="muted">answer-taken</span> seq=2 step=percentage-class status=done notes=Added Percentage.Of and its Compile item</div>
+<div class="line"><span class="at">[17:08:57]</span> <span class="muted">check-started</span> step=percentage-class argv=[&quot;powershell&quot;,&quot;-NoProfile&quot;,&quot;-Command&quot;,&quot;if (-not (Select-String -Path src/ContosoUniversity/ContosoUniversity.csproj -SimpleMatch 'Features\\Percentage\\Percentage.cs' -Quiet)) { exit 1 }&quot;]</div>
+<div class="line"><span class="at">[17:08:58]</span> <span class="muted">check-ended</span> step=percentage-class argv=[&quot;powershell&quot;,&quot;-NoProfile&quot;,&quot;-Command&quot;,&quot;if (-not (Select-String -Path src/ContosoUniversity/ContosoUniversity.csproj -SimpleMatch 'Features\\Percentage\\Percentage.cs' -Quiet)) { exit 1 }&quot;] outcome=<span class="good">passed</span> seconds=1</div>
+<div class="line"><span class="at">[17:09:02]</span> <span class="muted">report-accepted</span> seq=2 step=percentage-class files=[] notes=Added Percentage.Of and its Compile item</div>
+<div class="line"><span class="at">[17:09:02]</span> <span class="muted">instruction-issued</span> seq=3 kind=step step=percentage-ui</div>
+<div class="line"><span class="at">[17:09:20]</span> <span class="muted">run-resumed</span> session=005 phase=<span class="milestone">work</span> mode=pull</div>
+<div class="line"><span class="at">[17:09:20]</span> <span class="muted">answer-taken</span> seq=3 step=percentage-ui status=done notes=Added Percentage controller, view, csproj items and layout link</div>
+<div class="line"><span class="at">[17:09:21]</span> <span class="muted">check-started</span> step=percentage-ui argv=[&quot;powershell&quot;,&quot;-NoProfile&quot;,&quot;-Command&quot;,&quot;if (-not ((Select-String -Path src/ContosoUniversity/ContosoUniversity.csproj -SimpleMatch 'Features\\Percentage\\UiController.cs' -Quiet) -and (Select-String -Path src/ContosoUniversity/ContosoUniversity.csproj -SimpleMatch 'Features\\Percentage\\Index.cshtml' -Quiet) -and (Select-String -Path src/ContosoUniversity/Features/Shared/_Layout.cshtml -SimpleMatch '\&quot;Percentage\&quot;' -Quiet))) { exit 1 }&quot;]</div>
+<div class="line"><span class="at">[17:09:22]</span> <span class="muted">check-ended</span> step=percentage-ui argv=[&quot;powershell&quot;,&quot;-NoProfile&quot;,&quot;-Command&quot;,&quot;if (-not ((Select-String -Path src/ContosoUniversity/ContosoUniversity.csproj -SimpleMatch 'Features\\Percentage\\UiController.cs' -Quiet) -and (Select-String -Path src/ContosoUniversity/ContosoUniversity.csproj -SimpleMatch 'Features\\Percentage\\Index.cshtml' -Quiet) -and (Select-String -Path src/ContosoUniversity/Features/Shared/_Layout.cshtml -SimpleMatch '\&quot;Percentage\&quot;' -Quiet))) { exit 1 }&quot;] outcome=<span class="good">passed</span> seconds=1</div>
+<div class="line"><span class="at">[17:09:26]</span> <span class="muted">report-accepted</span> seq=3 step=percentage-ui files=[] notes=Added Percentage controller, view, csproj items and layout link</div>
+<div class="line"><span class="at">[17:09:26]</span> <span class="muted">instruction-issued</span> seq=4 kind=step step=percentage-tests</div>
+<div class="line"><span class="at">[17:09:39]</span> <span class="muted">run-resumed</span> session=005 phase=<span class="milestone">work</span> mode=pull</div>
+<div class="line"><span class="at">[17:09:39]</span> <span class="muted">answer-taken</span> seq=4 step=percentage-tests status=done notes=Added PercentageTests and its Compile item</div>
+<div class="line"><span class="at">[17:09:40]</span> <span class="muted">check-started</span> step=percentage-tests argv=[&quot;powershell&quot;,&quot;-NoProfile&quot;,&quot;-Command&quot;,&quot;if (-not (Select-String -Path src/IntegrationTests/IntegrationTests.csproj -SimpleMatch 'Features\\Percentage\\PercentageTests.cs' -Quiet)) { exit 1 }&quot;]</div>
+<div class="line"><span class="at">[17:09:41]</span> <span class="muted">check-ended</span> step=percentage-tests argv=[&quot;powershell&quot;,&quot;-NoProfile&quot;,&quot;-Command&quot;,&quot;if (-not (Select-String -Path src/IntegrationTests/IntegrationTests.csproj -SimpleMatch 'Features\\Percentage\\PercentageTests.cs' -Quiet)) { exit 1 }&quot;] outcome=<span class="good">passed</span> seconds=1</div>
+<div class="line"><span class="at">[17:09:45]</span> <span class="muted">report-accepted</span> seq=4 step=percentage-tests files=[] notes=Added PercentageTests and its Compile item</div>
+<div class="line"><span class="at">[17:09:45]</span> <span class="milestone">phase</span> phase=<span class="milestone">preverify</span></div>
+<div class="line"><span class="at">[17:09:45]</span> <span class="milestone">phase</span> phase=<span class="milestone">verify</span></div>
+<div class="line"><span class="at">[17:09:46]</span> <span class="muted">job-started</span> name=verification pid=44576 log=.dabbler/runs/s5/driver/jobs/verification.log</div>
+<div class="line"><span class="at">[17:10:46]</span> <span class="muted">job-finished</span> name=verification exit=<span class="good">0</span> log=.dabbler/runs/s5/driver/jobs/verification.log</div>
+<div class="line"><span class="at">[17:10:46]</span> <span class="muted">verification-passed</span></div>
+<div class="line"><span class="at">[17:10:46]</span> <span class="milestone">phase</span> phase=<span class="milestone">run-of-record</span></div>
+<div class="line"><span class="at">[17:10:47]</span> <span class="muted">run-of-record</span> suite=dotnet-framework stage=final-full why=dotnet-framework declares no select command=&quot;src\packages\Fixie.1.0.1\lib\net45\Fixie.Console.exe&quot; &quot;src\IntegrationTests\bin\Debug\ContosoUniversity.IntegrationTests.dll&quot;</div>
+<div class="line"><span class="at">[17:10:47]</span> <span class="muted">job-started</span> name=run of record: dotnet-framework pid=22912 log=.dabbler/runs/s5/driver/jobs/run-of-record-dotnet-framework.log</div>
+<div class="line"><span class="at">[17:11:09]</span> <span class="muted">job-finished</span> name=run of record: dotnet-framework exit=<span class="bad">1</span> log=.dabbler/runs/s5/driver/jobs/run-of-record-dotnet-framework.log</div>
+<div class="line"><span class="at">[17:11:09]</span> <span class="muted">run-of-record-red-not-required</span> suite=dotnet-framework command=&quot;src\packages\Fixie.1.0.1\lib\net45\Fixie.Console.exe&quot; &quot;src\IntegrationTests\bin\Debug\ContosoUniversity.IntegrationTests.dll&quot; log=.dabbler/runs/s5/driver/jobs/run-of-record-dotnet-framework.log</div>
+<div class="line"><span class="at">[17:11:09]</span> <span class="milestone">phase</span> phase=<span class="milestone">land</span></div>
+<div class="line"><span class="at">[17:11:11]</span> <span class="muted">committing</span> subject=Session 5: The percentage page</div>
+<div class="line"><span class="at">[17:11:12]</span> <span class="muted">pushing</span></div>
+<div class="line"><span class="at">[17:11:16]</span> <span class="muted">landed</span> commit=700daa449363ca93e977eafaea88cc09048d2582</div>
+<div class="line"><span class="at">[17:11:16]</span> <span class="milestone">phase</span> phase=<span class="milestone">publish</span></div>
+<div class="line"><span class="at">[17:11:16]</span> <span class="muted">publish-skipped</span> reason=an ordinary session never publishes</div>
+<div class="line"><span class="at">[17:11:16]</span> <span class="milestone">phase</span> phase=<span class="milestone">close</span></div>
+<div class="line"><span class="at">[17:11:17]</span> <span class="muted">job-started</span> name=close pid=28416 log=.dabbler/runs/s5/driver/jobs/close.log</div>
+<div class="line"><span class="at">[17:11:28]</span> <span class="muted">job-finished</span> name=close exit=<span class="good">0</span> log=.dabbler/runs/s5/driver/jobs/close.log</div>
+<div class="line"><span class="at">[17:11:28]</span> <span class="milestone">phase</span> phase=<span class="milestone">log</span></div>
+<div class="line"><span class="at">[17:11:28]</span> <span class="muted">transcript-rendering</span> carry=outline</div></div>
+<h2>Verification</h2>
+<table>
+<tr><th>Round</th><th>Phase</th><th>Verdict</th><th>Reviewer</th><th>Provider</th><th>Transport</th><th>Findings</th></tr>
+<tr><td>1</td><td>full</td><td><span class="good">VERIFIED</span></td><td>gpt-5.6-terra</td><td>openai</td><td>api</td><td><details><summary>1 finding</summary></details></td></tr><tr class="findings"><td colspan="7"><table>
+<tr><th>#</th><th>Severity</th><th>Finding</th><th>Response</th></tr>
+<tr><td>0</td><td><strong>minor</strong></td><td>**Nit:** Add controller regression coverage: with a new `UiController`, call `Index(1m, 4m)` and assert a view result whose `ViewBag.Part`, `ViewBag.Whole`, and `ViewBag.Result` are `1m`, `4m`, and `25m`; also call parameterless `Index()` and assert it returns a view. Today’s controller satisfies these expectations, so this is additional coverage rather than a defect.</td><td>not answered</td></tr>
+</table></td></tr>
+</table>
+<h2>Test runs</h2>
+<table>
+<tr><th>Suite</th><th>Stage</th><th>Outcome</th><th>Duration</th><th>Passed</th><th>Failed</th><th>Skipped</th><th>Command</th></tr>
+<tr><td>dotnet-framework</td><td>final-full</td><td><span class="bad">failed</span></td><td>20s</td><td></td><td></td><td></td><td><span class="mono">&quot;src\packages\Fixie.1.0.1\lib\net45\Fixie.Console.exe&quot; &quot;src\IntegrationTests\bin\Debug\ContosoUniversity.IntegrationTests.dll&quot;</span></td></tr>
+</table>
+<h2>Jobs</h2>
+<div><strong>close</strong> exit <span class="good">0</span> <span class="muted">(passed -- output not carried; dabbler transcript --full carries it)</span></div>
+<details><summary><strong>run-of-record-dotnet-framework</strong> exit <span class="bad">1</span></summary>
+<pre>running dotnet-framework: &quot;src\packages\Fixie.1.0.1\lib\net45\Fixie.Console.exe&quot; &quot;src\IntegrationTests\bin\Debug\ContosoUniversity.IntegrationTests.dll&quot;
+------ Testing Assembly ContosoUniversity.IntegrationTests.dll ------
+
+1228944b-18a2-475a-ba26-af2eadaf9c62
+Test 'ContosoUniversity.IntegrationTests.Features.Course.CreateTests.Should_create(ContosoUniversity.IntegrationTests.TestContextFixture, ContosoUniversity.Models.Department)' failed: System.InvalidOperationException
+This operation requires a connection to the 'master' database. Unable to create a connection to the 'master' database because the original database connection has been opened and credentials have been removed from the connection string. Supply an unopened connection.
+   at System.Data.Entity.SqlServer.SqlProviderServices.UsingMasterConnection(DbConnection sqlConnection, Action`1 act)
+   at System.Data.Entity.SqlServer.SqlProviderServices.CreateDatabaseFromScript(Nullable`1 commandTimeout, DbConnection sqlConnection, String createDatabaseScript)
+   at System.Data.Entity.SqlServer.SqlProviderServices.DbCreateDatabase(DbConnection connection, Nullable`1 commandTimeout, StoreItemCollection storeItemCollection)
+   at System.Data.Entity.Migrations.Utilities.DatabaseCreator.Create(DbConnection connection)
+   at System.Data.Entity.Migrations.DbMigrator.EnsureDatabaseExists(Action mustSucceedToKeepDatabase)
+   at System.Data.Entity.Migrations.DbMigrator.Update(String targetMigration)
+   at System.Data.Entity.Internal.DatabaseCreator.CreateDatabase(InternalContext internalContext, Func`3 createMigrator, ObjectContext objectContext)
+   at System.Data.Entity.Database.Create(DatabaseExistenceState existenceState)
+   at System.Data.Entity.CreateDatabaseIfNotExists`1.InitializeDatabase(TContext context)
+   at System.Data.Entity.Internal.InternalContext.PerformInitializationAction(Action action)
+   at System.Data.Entity.Internal.InternalContext.PerformDatabaseInitialization()
+   at System.Data.Entity.Internal.RetryAction`1.PerformAction(TInput input)
+   at System.Data.Entity.Internal.LazyInternalContext.InitializeDatabaseAction(Action`1 action)
+   at System.Data.Entity.Internal.LazyInternalContext.get_ObjectContext()
+   at System.Data.Entity.Internal.InternalContext.DetectChanges(Boolean force)
+   at System.Data.Entity.Internal.InternalContext.GetStateEntries(Func`2 predicate)
+   at System.Data.Entity.Infrastructure.DbChangeTracker.Entries()
+   at System.Data.Entity.DbContext.GetValidationErrors()
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at ContosoUniversity.DAL.SchoolContext.CloseTransaction(Exception exception) in C:\temp\s310-contosouniversity\src\ContosoUniversity\DAL\SchoolContext.cs:line 88
+   at ContosoUniversity.IntegrationTests.TestContextFixture.Do(Action`1 action) in C:\temp\s310-contosouniversity\src\IntegrationTests\TestContextFixture.cs:line 84
+   at ContosoUniversity.IntegrationTests.TestContextFixture.SaveAll(Object[] entities) in C:\temp\s310-contosouniversity\src\IntegrationTests\TestContextFixture.cs:line 27
+   at ContosoUniversity.IntegrationTests.Features.Course.CreateTests.Should_create(TestContextFixture fixture, Department dept) in C:\temp\s310-contosouniversity\src\IntegrationTests\Features\Course\CreateTests.cs:line 12
+
+------- Inner Exception: System.Data.SqlClient.SqlException -------
+Cannot create file 'C:\Users\denmi\ContosoUniversity.mdf' because it already exists. Change the file path or the file name, and retry the operation.
+CREATE DATABASE failed. Some file names listed could not be created. Check related errors.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean&amp; dataReady)
+   at System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean&amp; usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at System.Data.Entity.Infrastructure.Interception.InternalDispatcher`1.Dispatch[TTarget,TInterceptionContext,TResult](TTarget target, Func`3 operation, TInterceptionContext interceptionContext, Action`3 executing, Action`3 executed)
+   at System.Data.Entity.Infrastructure.Interception.DbCommandDispatcher.NonQuery(DbCommand command, DbCommandInterceptionContext interceptionContext)
+   at System.Data.Entity.SqlServer.SqlProviderServices.&lt;&gt;c__DisplayClass1a.&lt;CreateDatabaseFromScript&gt;b__19(DbConnection conn)
+   at System.Data.Entity.SqlServer.SqlProviderServices.&lt;&gt;c__DisplayClass33.&lt;UsingConnection&gt;b__32()
+   at System.Data.Entity.SqlServer.SqlProviderServices.UsingMasterConnection(DbConnection sqlConnection, Action`1 act)
+
+5 passed, 1 failed, took 11.03 seconds (Fixie 1.0.1).
+
+recorded dotnet-framework [final-full]: failed in 20s (timed here)
+</pre></details>
+<div><strong>verification</strong> exit <span class="good">0</span> <span class="muted">(passed -- output not carried; dabbler transcript --full carries it)</span></div>
+</main>
+</body>
+</html>
