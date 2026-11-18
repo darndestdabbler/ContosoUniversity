@@ -92,7 +92,7 @@
     {
       "number": 5,
       "title": "The percentage page",
-      "status": "in-progress",
+      "status": "complete",
       "startedAt": "2026-11-18T12:00:04.544000-05:00",
       "orchestrator": {
         "engine": "claude-code",
@@ -102,7 +102,7 @@
       },
       "frameworkVersion": "3.36.0",
       "startCommit": "77dccce636f2e6dac676343dbedbd3c92aa08ccd",
-      "completedAt": null,
+      "completedAt": "2026-11-18T12:11:22.515000-05:00",
       "verificationVerdict": "VERIFIED",
       "verification": {
         "rounds": 1,
