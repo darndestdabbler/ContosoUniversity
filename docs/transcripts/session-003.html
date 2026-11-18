@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 003 transcript</title>
+<style>
+:root {
+  --page: #ffffff;
+  --ink: #1f1f1f;
+  --faint: #e4e4e4;
+  --panel: #f6f6f6;
+  --tone-milestone: #2a5db0;
+  --tone-good: #256029;
+  --tone-warn: #8a6100;
+  --tone-bad: #a31515;
+  --tone-muted: #6b6b6b;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page: #1e1e1e;
+    --ink: #d4d4d4;
+    --faint: #3a3a3a;
+    --panel: #252526;
+  --tone-milestone: #3874db;
+  --tone-good: #54a33b;
+  --tone-warn: #b79427;
+  --tone-bad: #f14c4c;
+  --tone-muted: #8c8c8c;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  padding: 24px 16px 64px;
+  background: var(--page);
+  color: var(--ink);
+  font: 14px/1.6 ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+}
+main { max-width: 68rem; margin: 0 auto; }
+h1 { font-size: 1.4rem; margin: 0 0 .25rem; }
+h2 { font-size: 1.05rem; margin: 2.5rem 0 .75rem; border-bottom: 1px solid var(--faint); padding-bottom: .3rem; }
+.stamp { color: var(--tone-muted); font-size: .85rem; margin: 0 0 .25rem; }
+.mono, pre, code { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; }
+.lines { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; font-size: 13px; }
+.line { white-space: pre-wrap; word-break: break-word; padding-left: 10.5ch; text-indent: -10.5ch; }
+.at { color: var(--tone-muted); }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td { text-align: left; padding: .35rem .6rem; border-bottom: 1px solid var(--faint); vertical-align: top; }
+th { color: var(--tone-muted); font-weight: 600; }
+details { margin: .5rem 0; }
+summary { cursor: pointer; }
+td details { margin: 0; }
+tr:has(details:not([open])) + tr.findings { display: none; }
+tr.findings > td { padding: 0 0 .5rem 1.5rem; }
+pre { background: var(--panel); padding: .75rem; overflow-x: auto; white-space: pre-wrap; word-break: break-word; font-size: 12.5px; }
+.stop, .cancelled { border-left: 3px solid var(--tone-bad); background: var(--panel); padding: .6rem .9rem; }
+.milestone { color: var(--tone-milestone); }
+.good { color: var(--tone-good); }
+.warn { color: var(--tone-warn); }
+.bad { color: var(--tone-bad); }
+.muted { color: var(--tone-muted); }
+</style>
+</head>
+<body>
+<main>
+<h1>Session 003 transcript</h1>
+<p class="stamp">Rendered 2026-11-10T23:39:49.577Z by dabbler-ai-router 3.31.0 at 5b26ba2a6a67fbc46270a78e68a762eba3d50293.</p>
+<p class="stamp">Engine cli, last phase <span class="milestone">log</span>, started 2026-11-10T18:34:00.060-05:00.</p>
+<h2>Session Plan</h2>
+<h3>Session 3: The calculator page</h3>
+<ol><li>Register.</li><li>Add <code>src/ContosoUniversity/Features/Calculator/Calculator.cs</code>: a static <code>Calculator</code> class with <code>Add</code> and <code>Subtract</code>, each taking two decimals and returning a decimal. List it in <code>ContosoUniversity.csproj</code> as a <code>Compile</code> item.</li><li>Add <code>src/ContosoUniversity/Features/Calculator/UiController.cs</code>, an <code>Index</code> action for GET that shows the form and one for POST that takes the two numbers and shows their sum and difference, and <code>src/ContosoUniversity/Features/Calculator/Index.cshtml</code>, the view. List the controller as a <code>Compile</code> item and the view as a <code>Content</code> item in <code>ContosoUniversity.csproj</code>, and add a Calculator link to the navigation in <code>src/ContosoUniversity/Features/Shared/_Layout.cshtml</code>.</li><li>Add <code>src/IntegrationTests/Features/Calculator/CalculatorTests.cs</code> with one test of <code>Add</code> and one of <code>Subtract</code>, listed in <code>IntegrationTests.csproj</code> as a <code>Compile</code> item. The compile control's MSBuild build of <code>src/ContosoUniversity.sln</code> builds it, and the Fixie console in <code>dabbler.yaml</code>'s <code>dotnet-framework</code> suite runs it.</li></ol>
+<h2>Work Plan</h2>
+<p>Session 3 adds an online calculator page to ContosoUniversity inside its existing shape: src/ContosoUniversity/Features/Calculator/Calculator.cs (a static Calculator with Add and Subtract over decimals), src/ContosoUniversity/Features/Calculator/UiController.cs (a GET Index showing the form and a POST Index showing the sum and difference, found by the existing ControllerFactory as ContosoUniversity.Features.Calculator.UiController) and src/ContosoUniversity/Features/Calculator/Index.cshtml (found by the existing feature view engine), each listed in ContosoUniversity.csproj as a Compile or Content item; a Calculator link in the navigation of src/ContosoUniversity/Features/Shared/_Layout.cshtml; and src/IntegrationTests/Features/Calculator/CalculatorTests.cs, one test of Add and one of Subtract, listed in IntegrationTests.csproj and run by the existing Fixie console. It is shown by the compile control's MSBuild build of src/ContosoUniversity.sln and by the Fixie run passing CalculatorTests.</p>
+<p>Landed <a href="https://github.com/darndestdabbler/ContosoUniversity/commit/ee996e3d24b9d9115f5000422fe7a8970a0f64c1"><code>ee996e3d24b9d9115f5000422fe7a8970a0f64c1</code></a>.</p>
+<table>
+<tr><th>Step</th><th>Ask</th><th>Files</th><th>Checks</th><th>Accepted</th></tr>
+<tr><td>Calculator</td><td><p>Add src/ContosoUniversity/Features/Calculator/Calculator.cs: a static Calculator class in namespace ContosoUniversity.Features.Calculator with Add and Subtract, each taking two decimals and returning a decimal, and list it in src/ContosoUniversity/ContosoUniversity.csproj as a Compile item beside the other Features items.</p></td><td><span class="mono">src/ContosoUniversity/Features/Calculator/Calculator.cs</span><br><span class="mono">src/ContosoUniversity/ContosoUniversity.csproj</span></td><td><code>{msbuild} src\ContosoUniversity.sln /restore /t:Build /p:RestorePackagesConfig=true /p:Configuration=Debug /v:minimal /nologo</code></td><td>yes</td></tr>
+<tr><td>Page</td><td><p>Add src/ContosoUniversity/Features/Calculator/UiController.cs (GET Index shows the form; POST Index takes two decimals and shows Calculator.Add and Calculator.Subtract of them) and src/ContosoUniversity/Features/Calculator/Index.cshtml (the form and the two results). List the controller as a Compile item and the view as a Content item in src/ContosoUniversity/ContosoUniversity.csproj, and add a Calculator link to the navigation in src/ContosoUniversity/Features/Shared/_Layout.cshtml.</p></td><td><span class="mono">src/ContosoUniversity/Features/Calculator/UiController.cs</span><br><span class="mono">src/ContosoUniversity/Features/Calculator/Index.cshtml</span><br><span class="mono">src/ContosoUniversity/ContosoUniversity.csproj</span><br><span class="mono">src/ContosoUniversity/Features/Shared/_Layout.cshtml</span></td><td><code>{msbuild} src\ContosoUniversity.sln /restore /t:Build /p:RestorePackagesConfig=true /p:Configuration=Debug /v:minimal /nologo</code></td><td>yes</td></tr>
+<tr><td>Tests</td><td><p>Add src/IntegrationTests/Features/Calculator/CalculatorTests.cs in namespace ContosoUniversity.IntegrationTests.Features.Calculator, one test of Add and one of Subtract using Shouldly as the existing tests do, and list it in src/IntegrationTests/IntegrationTests.csproj as a Compile item.</p></td><td><span class="mono">src/IntegrationTests/Features/Calculator/CalculatorTests.cs</span><br><span class="mono">src/IntegrationTests/IntegrationTests.csproj</span></td><td><code>{msbuild} src\ContosoUniversity.sln /restore /t:Build /p:RestorePackagesConfig=true /p:Configuration=Debug /v:minimal /nologo</code><br><code>node -e const r=require('child_process').spawnSync('src\\packages\\Fixie.1.0.1\\lib\\net45\\Fixie.Console.exe',['src\\IntegrationTests\\bin\\Debug\\ContosoUniversity.IntegrationTests.dll'],{encoding:'utf8',timeout:300000});const o=r.stdout||'';const f=[...o.matchAll(/^Test '([^(']+)/gm)].map(m=&gt;m[1]);const p=+((o.match(/(\d+) passed/)||[])[1]||0);if(p&lt;3||f.some(n=&gt;!/CreateTests\.Should_create/.test(n)))process.exit(1)</code></td><td>yes</td></tr>
+</table>
+<p>Non-goals:</p>
+<ul><li>No retargeting, reformatting or upgrading of any project or package, and no change to any project file beyond the new Compile and Content items</li><li>No fix of the pre-existing failing test CreateTests.Should_create</li><li>No documentation comments: session 4 adds them</li></ul>
+<h2>What the framework said</h2>
+<div class="lines"><div class="line"><span class="at">[23:34:00]</span> <span class="muted">run-started</span> session=003 mode=pull</div>
+<div class="line"><span class="at">[23:34:00]</span> <span class="muted">instruction-issued</span> seq=1 kind=step step=plan</div>
+<div class="line"><span class="at">[23:34:44]</span> <span class="muted">run-resumed</span> session=003 phase=<span class="milestone">plan</span> mode=pull</div>
+<div class="line"><span class="at">[23:34:44]</span> <span class="muted">plan-accepted</span> steps=[&quot;calculator&quot;,&quot;page&quot;,&quot;tests&quot;] non_goals=3</div>
+<div class="line"><span class="at">[23:34:44]</span> <span class="milestone">phase</span> phase=<span class="milestone">work</span></div>
+<div class="line"><span class="at">[23:34:44]</span> <span class="muted">instruction-issued</span> seq=2 kind=step step=calculator</div>
+<div class="line"><span class="at">[23:35:13]</span> <span class="muted">run-resumed</span> session=003 phase=<span class="milestone">work</span> mode=pull</div>
+<div class="line"><span class="at">[23:35:15]</span> <span class="muted">check-passed</span> step=calculator argv=[&quot;{msbuild}&quot;,&quot;src\\ContosoUniversity.sln&quot;,&quot;/restore&quot;,&quot;/t:Build&quot;,&quot;/p:RestorePackagesConfig=true&quot;,&quot;/p:Configuration=Debug&quot;,&quot;/v:minimal&quot;,&quot;/nologo&quot;]</div>
+<div class="line"><span class="at">[23:35:16]</span> <span class="muted">report-accepted</span> seq=2 step=calculator files=[&quot;src/ContosoUniversity/Features/Calculator/Calculator.cs&quot;,&quot;src/ContosoUniversity/ContosoUniversity.csproj&quot;] notes=Static Calculator with Add and Subtract; one Compile item</div>
+<div class="line"><span class="at">[23:35:16]</span> <span class="muted">instruction-issued</span> seq=3 kind=step step=page</div>
+<div class="line"><span class="at">[23:35:42]</span> <span class="muted">run-resumed</span> session=003 phase=<span class="milestone">work</span> mode=pull</div>
+<div class="line"><span class="at">[23:35:44]</span> <span class="muted">check-passed</span> step=page argv=[&quot;{msbuild}&quot;,&quot;src\\ContosoUniversity.sln&quot;,&quot;/restore&quot;,&quot;/t:Build&quot;,&quot;/p:RestorePackagesConfig=true&quot;,&quot;/p:Configuration=Debug&quot;,&quot;/v:minimal&quot;,&quot;/nologo&quot;]</div>
+<div class="line"><span class="at">[23:35:44]</span> <span class="muted">report-accepted</span> seq=3 step=page files=[&quot;src/ContosoUniversity/Features/Calculator/UiController.cs&quot;,&quot;src/ContosoUniversity/Features/Calculator/Index.cshtml&quot;,&quot;src/ContosoUniversity/ContosoUniversity.csproj&quot;,&quot;src/ContosoUniversity/Features/Shared/_Layout.cshtml&quot;] notes=Calculator UiController (GET and POST Index), its view, two csproj items and the navigation link</div>
+<div class="line"><span class="at">[23:35:44]</span> <span class="muted">instruction-issued</span> seq=4 kind=step step=tests</div>
+<div class="line"><span class="at">[23:36:38]</span> <span class="muted">run-resumed</span> session=003 phase=<span class="milestone">work</span> mode=pull</div>
+<div class="line"><span class="at">[23:36:58]</span> <span class="muted">check-passed</span> step=tests argv=[&quot;{msbuild}&quot;,&quot;src\\ContosoUniversity.sln&quot;,&quot;/restore&quot;,&quot;/t:Build&quot;,&quot;/p:RestorePackagesConfig=true&quot;,&quot;/p:Configuration=Debug&quot;,&quot;/v:minimal&quot;,&quot;/nologo&quot;]</div>
+<div class="line"><span class="at">[23:36:58]</span> <span class="muted">check-passed</span> step=tests argv=[&quot;node&quot;,&quot;-e&quot;,&quot;const r=require('child_process').spawnSync('src\\\\packages\\\\Fixie.1.0.1\\\\lib\\\\net45\\\\Fixie.Console.exe',['src\\\\IntegrationTests\\\\bin\\\\Debug\\\\ContosoUniversity.IntegrationTests.dll'],{encoding:'utf8',timeout:300000});const o=r.stdout||'';const f=[...o.matchAll(/^Test '([^(']+)/gm)].map(m=&gt;m[1]);const p=+((o.match(/(\\d+) passed/)||[])[1]||0);if(p&lt;3||f.some(n=&gt;!/CreateTests\\.Should_create/.test(n)))process.exit(1)&quot;]</div>
+<div class="line"><span class="at">[23:36:58]</span> <span class="muted">report-accepted</span> seq=4 step=tests files=[&quot;src/IntegrationTests/Features/Calculator/CalculatorTests.cs&quot;,&quot;src/IntegrationTests/IntegrationTests.csproj&quot;] notes=CalculatorTests (Add, Subtract) under Fixie: 3 passed, 1 failed (the pre-existing CreateTests.Should_create)</div>
+<div class="line"><span class="at">[23:36:58]</span> <span class="milestone">phase</span> phase=<span class="milestone">preverify</span></div>
+<div class="line"><span class="at">[23:36:58]</span> <span class="milestone">phase</span> phase=<span class="milestone">verify</span></div>
+<div class="line"><span class="at">[23:36:58]</span> <span class="muted">job-started</span> name=verification pid=39260 log=.dabbler/runs/s3/driver/jobs/verification.log</div>
+<div class="line"><span class="at">[23:37:46]</span> <span class="muted">job-finished</span> name=verification exit=<span class="bad">4</span> log=.dabbler/runs/s3/driver/jobs/verification.log</div>
+<div class="line"><span class="at">[23:37:46]</span> <span class="muted">verification-blocking</span></div>
+<div class="line"><span class="at">[23:37:46]</span> <span class="milestone">phase</span> phase=<span class="milestone">dispositions</span></div>
+<div class="line"><span class="at">[23:37:46]</span> <span class="muted">instruction-issued</span> seq=5 kind=rejection reasons=2</div>
+<div class="line"><span class="at">[23:38:22]</span> <span class="muted">run-resumed</span> session=003 phase=<span class="milestone">dispositions</span> mode=pull</div>
+<div class="line"><span class="at">[23:38:22]</span> <span class="muted">dispositions-accepted</span> round=1 fix=[0] reject=[] answers=[{&quot;finding&quot;:0,&quot;action&quot;:&quot;fix&quot;}]</div>
+<div class="line"><span class="at">[23:38:22]</span> <span class="milestone">phase</span> phase=<span class="milestone">fix</span></div>
+<div class="line"><span class="at">[23:38:22]</span> <span class="muted">instruction-issued</span> seq=6 kind=step step=fix-round-1</div>
+<div class="line"><span class="at">[23:38:36]</span> <span class="muted">run-resumed</span> session=003 phase=<span class="milestone">fix</span> mode=pull</div>
+<div class="line"><span class="at">[23:38:58]</span> <span class="muted">check-passed</span> step=fix-round-1 argv=[&quot;{msbuild}&quot;,&quot;src\\ContosoUniversity.sln&quot;,&quot;/restore&quot;,&quot;/t:Build&quot;,&quot;/p:RestorePackagesConfig=true&quot;,&quot;/p:Configuration=Debug&quot;,&quot;/v:minimal&quot;,&quot;/nologo&quot;] owner=calculator</div>
+<div class="line"><span class="at">[23:38:58]</span> <span class="muted">check-passed</span> step=fix-round-1 argv=[&quot;{msbuild}&quot;,&quot;src\\ContosoUniversity.sln&quot;,&quot;/restore&quot;,&quot;/t:Build&quot;,&quot;/p:RestorePackagesConfig=true&quot;,&quot;/p:Configuration=Debug&quot;,&quot;/v:minimal&quot;,&quot;/nologo&quot;] owner=page</div>
+<div class="line"><span class="at">[23:38:58]</span> <span class="muted">check-passed</span> step=fix-round-1 argv=[&quot;{msbuild}&quot;,&quot;src\\ContosoUniversity.sln&quot;,&quot;/restore&quot;,&quot;/t:Build&quot;,&quot;/p:RestorePackagesConfig=true&quot;,&quot;/p:Configuration=Debug&quot;,&quot;/v:minimal&quot;,&quot;/nologo&quot;] owner=tests</div>
+<div class="line"><span class="at">[23:38:58]</span> <span class="muted">check-passed</span> step=fix-round-1 argv=[&quot;node&quot;,&quot;-e&quot;,&quot;const r=require('child_process').spawnSync('src\\\\packages\\\\Fixie.1.0.1\\\\lib\\\\net45\\\\Fixie.Console.exe',['src\\\\IntegrationTests\\\\bin\\\\Debug\\\\ContosoUniversity.IntegrationTests.dll'],{encoding:'utf8',timeout:300000});const o=r.stdout||'';const f=[...o.matchAll(/^Test '([^(']+)/gm)].map(m=&gt;m[1]);const p=+((o.match(/(\\d+) passed/)||[])[1]||0);if(p&lt;3||f.some(n=&gt;!/CreateTests\\.Should_create/.test(n)))process.exit(1)&quot;] owner=tests</div>
+<div class="line"><span class="at">[23:38:59]</span> <span class="muted">report-accepted</span> seq=6 step=fix-round-1 files=[&quot;src/ContosoUniversity/Features/Calculator/Index.cshtml&quot;] notes=The calculator form opts out of the layout's global AJAX submit with the repository's own no-ajax class, so the POST renders the result</div>
+<div class="line"><span class="at">[23:38:59]</span> <span class="milestone">phase</span> phase=<span class="milestone">preverify</span></div>
+<div class="line"><span class="at">[23:38:59]</span> <span class="milestone">phase</span> phase=<span class="milestone">verify</span></div>
+<div class="line"><span class="at">[23:38:59]</span> <span class="muted">job-started</span> name=verification pid=39164 log=.dabbler/runs/s3/driver/jobs/verification.log</div>
+<div class="line"><span class="at">[23:39:24]</span> <span class="muted">job-finished</span> name=verification exit=<span class="good">0</span> log=.dabbler/runs/s3/driver/jobs/verification.log</div>
+<div class="line"><span class="at">[23:39:24]</span> <span class="muted">verification-passed</span></div>
+<div class="line"><span class="at">[23:39:24]</span> <span class="milestone">phase</span> phase=<span class="milestone">run-of-record</span></div>
+<div class="line"><span class="at">[23:39:24]</span> <span class="muted">run-of-record</span> suite=dotnet-framework stage=final-full why=dotnet-framework declares no select command=&quot;src\packages\Fixie.1.0.1\lib\net45\Fixie.Console.exe&quot; &quot;src\IntegrationTests\bin\Debug\ContosoUniversity.IntegrationTests.dll&quot;</div>
+<div class="line"><span class="at">[23:39:24]</span> <span class="muted">job-started</span> name=run of record: dotnet-framework pid=49116 log=.dabbler/runs/s3/driver/jobs/run-of-record-dotnet-framework.log</div>
+<div class="line"><span class="at">[23:39:43]</span> <span class="muted">job-finished</span> name=run of record: dotnet-framework exit=<span class="bad">1</span> log=.dabbler/runs/s3/driver/jobs/run-of-record-dotnet-framework.log</div>
+<div class="line"><span class="at">[23:39:43]</span> <span class="muted">run-of-record-red-not-required</span> suite=dotnet-framework command=&quot;src\packages\Fixie.1.0.1\lib\net45\Fixie.Console.exe&quot; &quot;src\IntegrationTests\bin\Debug\ContosoUniversity.IntegrationTests.dll&quot; log=.dabbler/runs/s3/driver/jobs/run-of-record-dotnet-framework.log</div>
+<div class="line"><span class="at">[23:39:43]</span> <span class="milestone">phase</span> phase=<span class="milestone">land</span></div>
+<div class="line"><span class="at">[23:39:45]</span> <span class="muted">landed</span> commit=ee996e3d24b9d9115f5000422fe7a8970a0f64c1</div>
+<div class="line"><span class="at">[23:39:45]</span> <span class="milestone">phase</span> phase=<span class="milestone">publish</span></div>
+<div class="line"><span class="at">[23:39:45]</span> <span class="muted">publish-skipped</span> reason=an ordinary session never publishes</div>
+<div class="line"><span class="at">[23:39:45]</span> <span class="milestone">phase</span> phase=<span class="milestone">close</span></div>
+<div class="line"><span class="at">[23:39:45]</span> <span class="muted">job-started</span> name=close pid=39248 log=.dabbler/runs/s3/driver/jobs/close.log</div>
+<div class="line"><span class="at">[23:39:49]</span> <span class="muted">job-finished</span> name=close exit=<span class="good">0</span> log=.dabbler/runs/s3/driver/jobs/close.log</div>
+<div class="line"><span class="at">[23:39:49]</span> <span class="milestone">phase</span> phase=<span class="milestone">log</span></div></div>
+<h2>Verification</h2>
+<table>
+<tr><th>Round</th><th>Phase</th><th>Verdict</th><th>Reviewer</th><th>Provider</th><th>Transport</th><th>Findings</th></tr>
+<tr><td>1</td><td>full</td><td><span class="bad">ISSUES_FOUND</span></td><td>gpt-5.6-terra</td><td>openai</td><td>api</td><td><details open><summary>2 findings</summary></details></td></tr><tr class="findings"><td colspan="7"><table>
+<tr><th>#</th><th>Severity</th><th>Finding</th><th>Response</th></tr>
+<tr><td>0</td><td><strong>major</strong> <span class="bad">blocking</span></td><td>Calculator submissions are captured by the global AJAX handler, which reloads the GET page instead of displaying the POST calculation result.</td><td>fixed — The calculator form opts out of the layout's global AJAX submit with the repository's own no-ajax class, so the POST renders the result — (src/ContosoUniversity/Features/Calculator/Index.cshtml)</td></tr>
+<tr><td>1</td><td><strong>minor</strong></td><td>**Nit:** The required `CalculatorTests` methods do pin `Add` and `Subtract`, but no visible test exercises the calculator page’s actual submit path. A browser-level case should start on the rendered calculator page, submit `left=2.5` and `right=4`, and assert that the resulting page displays `Sum 6.5` and `Difference -1.5`; today the global AJAX interception reloads the blank GET form instead.</td><td>not answered</td></tr>
+</table></td></tr>
+<tr><td>2</td><td>fix-delta</td><td><span class="good">VERIFIED</span></td><td>gpt-5.6-terra</td><td>openai</td><td>api</td><td><details><summary>1 finding</summary></details></td></tr><tr class="findings"><td colspan="7"><table>
+<tr><th>#</th><th>Severity</th><th>Finding</th><th>Response</th></tr>
+<tr><td>0</td><td><strong>minor</strong></td><td>**Nit:** The prior browser-level coverage gap remains unaddressed in the supplied delta. A useful non-blocking test would render the Calculator page, submit `left=2.5` and `right=4`, and assert the response displays `Sum 6.5` and `Difference -1.5`; this would pin the interaction between the form and the layout AJAX behavior rather than only direct `Calculator.Add`/`Subtract` calls.</td><td>not answered</td></tr>
+</table></td></tr>
+</table>
+<h2>Test runs</h2>
+<table>
+<tr><th>Suite</th><th>Stage</th><th>Outcome</th><th>Duration</th><th>Passed</th><th>Failed</th><th>Skipped</th><th>Command</th></tr>
+<tr><td>dotnet-framework</td><td>final-full</td><td><span class="bad">failed</span></td><td>18s</td><td></td><td></td><td></td><td><span class="mono">&quot;src\packages\Fixie.1.0.1\lib\net45\Fixie.Console.exe&quot; &quot;src\IntegrationTests\bin\Debug\ContosoUniversity.IntegrationTests.dll&quot;</span></td></tr>
+</table>
+<h2>Jobs</h2>
+<div><strong>close</strong> exit <span class="good">0</span> <span class="muted">(passed -- output not carried; dabbler transcript --full carries it)</span></div>
+<details><summary><strong>run-of-record-dotnet-framework</strong> exit <span class="bad">1</span></summary>
+<pre>running dotnet-framework: &quot;src\packages\Fixie.1.0.1\lib\net45\Fixie.Console.exe&quot; &quot;src\IntegrationTests\bin\Debug\ContosoUniversity.IntegrationTests.dll&quot;
+------ Testing Assembly ContosoUniversity.IntegrationTests.dll ------
+
+ff22a1ed-032a-4d4f-b038-0f320aeb59ff
+Test 'ContosoUniversity.IntegrationTests.Features.Course.CreateTests.Should_create(ContosoUniversity.IntegrationTests.TestContextFixture, ContosoUniversity.Models.Department)' failed: System.InvalidOperationException
+This operation requires a connection to the 'master' database. Unable to create a connection to the 'master' database because the original database connection has been opened and credentials have been removed from the connection string. Supply an unopened connection.
+   at System.Data.Entity.SqlServer.SqlProviderServices.UsingMasterConnection(DbConnection sqlConnection, Action`1 act)
+   at System.Data.Entity.SqlServer.SqlProviderServices.CreateDatabaseFromScript(Nullable`1 commandTimeout, DbConnection sqlConnection, String createDatabaseScript)
+   at System.Data.Entity.SqlServer.SqlProviderServices.DbCreateDatabase(DbConnection connection, Nullable`1 commandTimeout, StoreItemCollection storeItemCollection)
+   at System.Data.Entity.Migrations.Utilities.DatabaseCreator.Create(DbConnection connection)
+   at System.Data.Entity.Migrations.DbMigrator.EnsureDatabaseExists(Action mustSucceedToKeepDatabase)
+   at System.Data.Entity.Migrations.DbMigrator.Update(String targetMigration)
+   at System.Data.Entity.Internal.DatabaseCreator.CreateDatabase(InternalContext internalContext, Func`3 createMigrator, ObjectContext objectContext)
+   at System.Data.Entity.Database.Create(DatabaseExistenceState existenceState)
+   at System.Data.Entity.CreateDatabaseIfNotExists`1.InitializeDatabase(TContext context)
+   at System.Data.Entity.Internal.InternalContext.PerformInitializationAction(Action action)
+   at System.Data.Entity.Internal.InternalContext.PerformDatabaseInitialization()
+   at System.Data.Entity.Internal.RetryAction`1.PerformAction(TInput input)
+   at System.Data.Entity.Internal.LazyInternalContext.InitializeDatabaseAction(Action`1 action)
+   at System.Data.Entity.Internal.LazyInternalContext.get_ObjectContext()
+   at System.Data.Entity.Internal.InternalContext.DetectChanges(Boolean force)
+   at System.Data.Entity.Internal.InternalContext.GetStateEntries(Func`2 predicate)
+   at System.Data.Entity.Infrastructure.DbChangeTracker.Entries()
+   at System.Data.Entity.DbContext.GetValidationErrors()
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at ContosoUniversity.DAL.SchoolContext.CloseTransaction(Exception exception) in C:\temp\s310-contosouniversity\src\ContosoUniversity\DAL\SchoolContext.cs:line 88
+   at ContosoUniversity.IntegrationTests.TestContextFixture.Do(Action`1 action) in C:\temp\s310-contosouniversity\src\IntegrationTests\TestContextFixture.cs:line 84
+   at ContosoUniversity.IntegrationTests.TestContextFixture.SaveAll(Object[] entities) in C:\temp\s310-contosouniversity\src\IntegrationTests\TestContextFixture.cs:line 27
+   at ContosoUniversity.IntegrationTests.Features.Course.CreateTests.Should_create(TestContextFixture fixture, Department dept) in C:\temp\s310-contosouniversity\src\IntegrationTests\Features\Course\CreateTests.cs:line 12
+
+------- Inner Exception: System.Data.SqlClient.SqlException -------
+Cannot create file 'C:\Users\denmi\ContosoUniversity.mdf' because it already exists. Change the file path or the file name, and retry the operation.
+CREATE DATABASE failed. Some file names listed could not be created. Check related errors.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean&amp; dataReady)
+   at System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean&amp; usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at System.Data.Entity.Infrastructure.Interception.InternalDispatcher`1.Dispatch[TTarget,TInterceptionContext,TResult](TTarget target, Func`3 operation, TInterceptionContext interceptionContext, Action`3 executing, Action`3 executed)
+   at System.Data.Entity.Infrastructure.Interception.DbCommandDispatcher.NonQuery(DbCommand command, DbCommandInterceptionContext interceptionContext)
+   at System.Data.Entity.SqlServer.SqlProviderServices.&lt;&gt;c__DisplayClass1a.&lt;CreateDatabaseFromScript&gt;b__19(DbConnection conn)
+   at System.Data.Entity.SqlServer.SqlProviderServices.&lt;&gt;c__DisplayClass33.&lt;UsingConnection&gt;b__32()
+   at System.Data.Entity.SqlServer.SqlProviderServices.UsingMasterConnection(DbConnection sqlConnection, Action`1 act)
+
+3 passed, 1 failed, took 10.85 seconds (Fixie 1.0.1).
+
+recorded dotnet-framework [final-full]: failed in 18s (timed here)
+</pre></details>
+<div><strong>verification</strong> exit <span class="good">0</span> <span class="muted">(passed -- output not carried; dabbler transcript --full carries it)</span></div>
+</main>
+</body>
+</html>

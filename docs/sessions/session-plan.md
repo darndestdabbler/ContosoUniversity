@@ -1,0 +1,192 @@
+# Session plan
+
+> **Purpose:** the numbered sessions this repository runs, in order. The
+> first two set the work up; everything after them is the work.
+> **Workflow:** Full
+
+---
+
+## Sessions
+
+### Session 1: Author or import the change plan
+
+1. Register.
+2. The brief is the prompt this session was started with, or
+   `docs/planning/brief.md`: what is to change in this repository and
+   why -- the defects, the features or the upgrades wanted, and what is
+   out of scope. With neither, ask the person who started the session
+   for it and write their answer to that path before any work. The
+   plan's substance is theirs: do not search neighbouring directories
+   for one, and do not draft one from the code.
+3. This repository already holds code: `src/ContosoUniversity.sln`, `src/ContosoUniversity/ContosoUniversity.csproj`, `src/DBDeployment/DBDeployment.csproj`, `src/IntegrationTests/IntegrationTests.csproj`, and
+   `dabbler.yaml` says `posture: maintenance`. Read it before planning --
+   its projects, their target frameworks or JDKs, their project formats,
+   their build tools, their test frameworks and their folders -- and take
+   all of them as the plan's givens. Do not ask how production is split,
+   and do not propose new boundaries between projects. Then create — or
+   import — `docs/planning/solution-plan.md`, short: one paragraph on the
+   repository as found, and one section per change, saying what changes,
+   in which project, and how it is shown to work. A repository that
+   already has `docs/planning/project-plan.md` amends that file instead.
+4. Fit this framework's documents and suites to the projects that exist,
+   and change nothing else: where `dabbler.yaml` declares no suite that
+   runs the tests these projects have, say which session declares one.
+   Restructuring, retargeting or reformatting a project is not a change
+   this plan makes unless the person asks for it by name.
+
+The framework then verifies the work cross-provider, runs the suites as
+the run of record and closes the session. These are the framework's,
+not steps to plan.
+
+This session writes the plan and nothing else: it creates, edits or
+deletes no code, project, build file, test, `dabbler.yaml` suite or
+packaging.
+
+**Creates:** `docs/planning/solution-plan.md`. A later revision is just
+another plan session that amends the same file.
+
+### Session 2: Break the change plan into numbered sessions
+
+1. Register.
+2. Read `docs/planning/solution-plan.md` (or `docs/planning/project-plan.md`
+   where that is the file this repository keeps its plan in) and break
+   each change into numbered sessions appended to this file, each of
+   three to six work steps: one `### Session <N>: <title>` heading, and
+   its steps as a top-level ordered list. Step 1 registers the session
+   and the rest are the work: cross-provider verification, the run of
+   record and the close are the framework's, never steps to plan. Never
+   write a step that says "run the tests" without saying which run it
+   means.
+3. No session writes a skeleton, and none proposes restructuring,
+   retargeting or reformatting a project: the projects stay as they are,
+   and a step that adds a file to a non-SDK project lists it in that
+   project's `.csproj`. A release is a session with no steps, headed
+   `### Session <N>: Release <version> (release: <version>)`; propose its
+   version -- patch, minor or major -- for the person to approve with
+   the plan.
+
+The framework then verifies the work cross-provider, runs the suites as
+the run of record and closes the session. These are the framework's,
+not steps to plan.
+
+This session writes the plan and nothing else: it creates, edits or
+deletes no code, project, build file, test, `dabbler.yaml` suite or
+packaging.
+
+**Creates:** the numbered session list the rest of this repository runs.
+
+> Do NOT hand-author `sessions.json`. The first `session start`
+> bootstraps it from this plan — state files are the writers' job.
+
+### Session 3: The calculator page
+
+1. Register.
+2. Add `src/ContosoUniversity/Features/Calculator/Calculator.cs`: a static
+   `Calculator` class with `Add` and `Subtract`, each taking two decimals and
+   returning a decimal. List it in `ContosoUniversity.csproj` as a `Compile`
+   item.
+3. Add `src/ContosoUniversity/Features/Calculator/UiController.cs`, an
+   `Index` action for GET that shows the form and one for POST that takes
+   the two numbers and shows their sum and difference, and
+   `src/ContosoUniversity/Features/Calculator/Index.cshtml`, the view. List
+   the controller as a `Compile` item and the view as a `Content` item in
+   `ContosoUniversity.csproj`, and add a Calculator link to the navigation
+   in `src/ContosoUniversity/Features/Shared/_Layout.cshtml`.
+4. Add `src/IntegrationTests/Features/Calculator/CalculatorTests.cs` with
+   one test of `Add` and one of `Subtract`, listed in
+   `IntegrationTests.csproj` as a `Compile` item. The compile control's
+   MSBuild build of `src/ContosoUniversity.sln` builds it, and the Fixie
+   console in `dabbler.yaml`'s `dotnet-framework` suite runs it.
+
+### Session 4: Documentation comments on the calculator
+
+1. Register.
+2. Add XML documentation comments to `Calculator`, `Add` and `Subtract` in
+   `src/ContosoUniversity/Features/Calculator/Calculator.cs`, and to the
+   calculator `UiController` and both `Index` actions in
+   `src/ContosoUniversity/Features/Calculator/UiController.cs`. No code
+   line changes.
+3. Add a Razor comment at the top of
+   `src/ContosoUniversity/Features/Calculator/Index.cshtml` saying what the
+   page is. No markup changes. The compile control's MSBuild build shows
+   the comments compile, and the Fixie console still runs `CalculatorTests`.
+
+### Session 5 of 7: The percentage page
+
+Scope: `src/ContosoUniversity/Features/Percentage/`,
+`src/IntegrationTests/Features/Percentage/`, the two `.csproj` files'
+items, and the navigation in `_Layout.cshtml`.
+
+1. Register.
+2. Add `src/ContosoUniversity/Features/Percentage/Percentage.cs`: a static
+   `Percentage` class with `Of(decimal part, decimal whole)` returning
+   `part / whole * 100` rounded to two places, and throwing
+   `ArgumentException` when `whole` is zero. List it in
+   `ContosoUniversity.csproj` as a `Compile` item.
+3. Add `src/ContosoUniversity/Features/Percentage/UiController.cs`, an
+   `Index` action for GET that shows the form and one for POST that shows
+   the percentage, and `src/ContosoUniversity/Features/Percentage/Index.cshtml`,
+   the view, following the calculator page's pattern. List the controller
+   as a `Compile` item and the view as a `Content` item, and add a
+   Percentage link beside Calculator in
+   `src/ContosoUniversity/Features/Shared/_Layout.cshtml`.
+4. Add `src/IntegrationTests/Features/Percentage/PercentageTests.cs` with
+   one test of `Of` and one of the zero-whole refusal, listed in
+   `IntegrationTests.csproj` as a `Compile` item.
+
+Non-goals. No change to the calculator, the target framework, the project
+format or the test framework.
+
+Releasable. no.
+
+### Session 6 of 7: A step whose check fails, on purpose
+
+Scope: `src/IntegrationTests/Features/Percentage/PercentageTests.cs` only.
+
+This session exists to walk a stop. Its one work step adds a test to
+`PercentageTests.cs` asserting that `Percentage.Of(1, 3)` is `33.34`, which
+it is not (it is `33.33`), and declares as its check the compile control's
+MSBuild build followed by the Fixie console over
+`ContosoUniversity.IntegrationTests.dll`, which must then fail. Do not
+change `Percentage.cs` and do not change the expected value to make the
+check pass: when the check refuses the step, report the step blocked with
+the failing test named in the notes, and leave the stop to the person.
+
+Releasable. no.
+
+### Session 7 of 7: Reliable LocalDB setup and transaction failure handling
+
+Scope: `src/IntegrationTests/LocalDbFactory.cs`,
+`src/IntegrationTests/IntegrationTestContainerFactory.cs`,
+`src/IntegrationTests/TestContextFixture.cs`,
+`src/ContosoUniversity/DAL/SchoolContext.cs`, the integration-test project
+and its Fixie coverage, and the related `dabbler.yaml` suite note.
+
+Why. The integration suite can fail while Entity Framework attempts to create
+a database whose MDF file already exists. The test helper then calls
+`CloseTransaction` again after its first call has already handled and
+re-thrown the failure, which can obscure the original database error. The
+current factory and container choose the database name at separate points,
+so their runtime connection settings need to be made consistent.
+
+What. Establish one explicit, test-owned LocalDB database identity and a
+repeatable creation and cleanup lifecycle that cannot collide with an orphaned
+MDF file or delete unrelated data. Make transaction failure handling
+one-shot so rollback and disposal do not trigger another `SaveChanges` and
+the original exception remains visible. Add focused Fixie regression
+coverage for first-run/repeated-run database initialization and for preserving
+an action or save failure; list any new test source in the non-SDK project.
+Update the suite note to reflect verified behavior, without making the whole
+suite a close requirement while its separately recorded foreign-key failure
+remains unresolved.
+
+Non-goals. Do not change the .NET Framework target, project format, LocalDB
+or Fixie test framework; alter production database configuration; delete
+unverified user data; or fix unrelated foreign-key behavior unless evidence
+shows it is caused by this test-database lifecycle change.
+
+Tests. Build `src/ContosoUniversity.sln` with the existing MSBuild compile
+control; run the focused Fixie regression tests and the existing integration
+suite, recording the known independent failure accurately if it remains.
+
+Releasable. no.
