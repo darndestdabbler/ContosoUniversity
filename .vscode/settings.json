@@ -1,4 +1,4 @@
 {
   "dabbler.authoringModel": "gpt-6.1-terra",
-  "dabbler.engine": "copilot"
+  "dabbler.engine": "claude-code"
 }
