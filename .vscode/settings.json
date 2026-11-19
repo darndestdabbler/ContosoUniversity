@@ -1,3 +1,4 @@
 {
-  "dabbler.authoringModel": "claude-sonnet-5-5"
+  "dabbler.authoringModel": "claude-sonnet-5-5",
+  "dabbler.engine": "copilot"
 }
