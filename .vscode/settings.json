@@ -1,4 +1,4 @@
 {
-  "dabbler.authoringModel": "claude-sonnet-5-5",
+  "dabbler.authoringModel": "gpt-6.1-terra",
   "dabbler.engine": "copilot"
 }
